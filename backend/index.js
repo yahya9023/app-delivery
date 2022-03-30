@@ -51,7 +51,7 @@ app.post("/upload", (req, res) => {
   });
 
 
-  app.use(cors());
+app.use(cors());
 app.use(bp.json());
 app.use(passport.initialize());
 app.use(cookieParser());
@@ -61,6 +61,24 @@ require('./middlewares/passport')(passport);
 
 //User Router Middleware
 app.use("/api/users",require("./routes/users"));
+
+
+app.use("/api/product",require("./routes/products"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
