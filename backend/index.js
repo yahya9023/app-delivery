@@ -3,7 +3,9 @@ const cors = require("cors");
 const bp = require("body-parser");
 
 const exp = require("express");
+
 const expressValidator = require('express-validator');
+
 const cookieParser = require('cookie-parser')
 
 const app  = exp();
@@ -15,10 +17,6 @@ const {connect} = require("mongoose");
 const {DB, PORT}= require("./config");
 
 const { success , error  } = require("consola")
-
-
-
-
 
 const  { engine } = require('express-handlebars') ;
 app.engine('handlebars', engine());
@@ -89,4 +87,3 @@ const startApp = async ()=>{
     }
     }
     startApp();
-    
