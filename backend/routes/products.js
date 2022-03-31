@@ -18,7 +18,7 @@ const {
   router.post("/add" , upload.single('image_cover'),  creatProduct);
   router.get("/",/*userAuth,  checkRole(['admin']),*/ getProducts);
   router.get("/:productId",  getProduct);
-  router.patch("/:productId",  updateProduct);
+  router.patch("/:productId",  upload.single('image_cover') ,  updateProduct);
   router.delete("/:productId",  deleteProduct);
 
   module.exports = router;

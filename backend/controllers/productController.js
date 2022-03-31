@@ -77,6 +77,9 @@ const creatProduct = async (req, res) => {
         }
       })
 
+      if (req.file) {
+        editeproduct.image_cover = req.file.originalname
+      }
 
       res.status(201).json({ success: true, data: editeproduct })
     } catch (error) {
