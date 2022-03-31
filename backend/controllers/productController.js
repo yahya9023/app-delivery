@@ -28,6 +28,82 @@ const creatProduct = async (req, res) => {
     }
   }
 
+
+
+
+  const getProducts = async (req, res) => {
+    try {
+      const products = await Product.find()
+      res.status(200).json({ success: true, data: products })
+    } catch (error) {
+      res.status(409).json({ success: false, data: [], error: error })
+    }
+  }
+
+
+
+
+
+  const getProduct = async (req, res) => {
+    const productId = req.params.productId
+    try {
+      const product = await Product.find({ _id: productId })
+      res.status(200).json({ success: true, data: product })
+    } catch (error) {
+      res.status(404).json({ success: false, data: [], error: error })
+    }
+  }
+
+
+
+
+
+
+
+
+  const updateProduct = async (req, res) => {
+    const productId = req.params.productId
+
+    const {name} = req.body
+      const {description} = req.body
+      const {price} = req.body
+  
+    try {
+      const editeproduct = await Product.updateOne({ _id: productId }, {
+        $set: {
+        name: name,
+        description: description,
+        price: price,        
+        }
+      })
+
+
+      res.status(201).json({ success: true, data: editeproduct })
+    } catch (error) {
+      res.status(409).json({ success: false, data: [], error: error })
+    }
+  }
+
+
+
+const deleteProduct = async (req, res) => {
+  const productId = req.params.productId
+  try {
+    await Product.remove({ _id: productId })
+    res.status(200).json({ success: true, data: deleteProduct })
+  } catch (error) {
+    res.status(409).json({ success: false, data: [], error: error })
+  }
+}
+
+
+
+
+
   module.exports = {
-    creatProduct
+    creatProduct,
+    getProducts,
+    getProduct,
+    updateProduct,
+    deleteProduct
   }
