@@ -26,11 +26,11 @@ const submit = (e) => {
 
 if(JWT1.role==="owner-user"){
     
-    window.location="/dashbordowner"
+    window.location="/"
 
 }else if(JWT1.role==="user"){
 
-    window.location="/dashborduser"
+    window.location="/"
 }else{
     window.location="/dashbordadmin"
 }        
