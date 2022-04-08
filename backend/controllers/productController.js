@@ -1,5 +1,10 @@
 const Product = require("../models/Product")
+const {
 
+  userAuth,
+
+  checkRole
+} = require("../controllers/Auth");
 const creatProduct = async (req, res) => {
 
     console.log('request',req.body);
@@ -8,11 +13,14 @@ const creatProduct = async (req, res) => {
       const name = req.body.name
       const description = req.body.description
       const price = req.body.price
+      const category = req.body.category
+
 
       const newProduct = new Product({
         name: name,
         description: description,
         price: price,
+        category: category,
         // user_id:user_id
       })
 
@@ -67,6 +75,7 @@ const creatProduct = async (req, res) => {
     const {name} = req.body
       const {description} = req.body
       const {price} = req.body
+      const {category} = req.body
   
     try {
       const editeproduct = await Product.updateOne({ _id: productId }, {
@@ -74,6 +83,7 @@ const creatProduct = async (req, res) => {
         name: name,
         description: description,
         price: price,        
+        category: category,        
         }
       })
 
