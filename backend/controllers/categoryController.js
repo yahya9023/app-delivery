@@ -70,7 +70,7 @@ const creatCategory = async (req, res) => {
   const getCategory = async (req, res) => {
     const categoryId = req.params.categoryId
     try {
-      const category = await Product.find({ _id: categoryId })
+      const category = await Category.find({ _id: categoryId })
       res.status(200).json({ success: true, data: category })
     } catch (error) {
       res.status(404).json({ success: false, data: [], error: error })
