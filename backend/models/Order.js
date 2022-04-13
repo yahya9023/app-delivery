@@ -5,7 +5,12 @@ const OrderSchema = new Schema   (
 
         user_id: {
             type: Schema.Types.ObjectId, ref:'users' ,
-            required: true
+            
+        },
+        liv_id: {
+            default:null,
+            type: Schema.Types.ObjectId, ref:'users' ,
+
         },
         orderItems: [
            {
@@ -16,7 +21,7 @@ const OrderSchema = new Schema   (
                    type: Schema.Types.ObjectId, ref:'products' ,
                    required: true
                 },
-                //    image: { type: String , required: true},
+      
             }
         ],
 
@@ -31,43 +36,7 @@ const OrderSchema = new Schema   (
             default:"new",
             enum:["new","inprogress", "inliv","delivred","done"]
         },
-        // paymentMethod : {
-        //     type : String,
-        //     required: true,
-        //     default: "Paypal"
-        // },
-        // paymentResult: {
-        //     id: {type : String },
-        //     status : { type : String},
-        //     update_time: { type : String},
-        //     email_address: { type: String }
-        // },
-        // taxPrice: {
-        //     type : Number,
-        //     required: true,
-        //     default: 0.0,
-        // },
-        // shippingPrice: {
-        //     type: Number,
-        //     required: true,
-        //     default: 0.0
-        // },
-        // isPaid: {
-        //     type : Boolean,
-        //     required: true,
-        //     default: false
-        // },
-        // paidAt: {
-        //     type: Date,
-        // },
-        // isDelivered: {
-        //     type: Boolean,
-        //     required: true,
-        //     default: false
-        // },
-        // deliveredAt: {
-        //     type: Date
-        // }
+     
     },
     {
         timestamps: true,
@@ -75,5 +44,3 @@ const OrderSchema = new Schema   (
 
 );
 module.exports = model("Order", OrderSchema);
-
-// export default Order;

@@ -1,6 +1,8 @@
+const nodemailer = require("nodemailer");
 const Order = require('../models/Order');
 
 const createOrder =  (req, res) => {
+  console.log(req.body);
     try {
       const address = req.body.address
       const orderItems = req.body.orderItems
@@ -97,11 +99,59 @@ const createOrder =  (req, res) => {
     }  
   }
 
+
+
+
+  // _______________________________________________________________
+
+
+
+const sendEmail = async (req, res) => {
+
+ 
+
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+
+      user: 'yahiaelhabchi476@gmail.com',
+      pass: 'yahya2027@',
+
+  }
+  });
+
+  let mailOptions = {
+      from: 'yahiaelhabchi476@gmail.com', // sender address
+      to: "yahyaelhabchi476@gmail.com", // list of receivers
+      
+
+
+      subject: "Hello ✔", // Subject line
+      text: " jjejejeje", // plain text body
+      html: "<b>Monsieur  Suit  a votre achat  nous vous addressons,ci-joint une facture d'un montant de :<strong>  </strong> dh En vous remerciant par avance </b>",
+
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+ 
+}
+
+// ___________________________________________________________________________________________
+
+  
+
   module.exports = {
     createOrder,
     getOrder,
     getorders,
     AdminUpdateOrderStatus,
     allOrders,
-    deleteorder
+    deleteorder,
+    sendEmail
     };
