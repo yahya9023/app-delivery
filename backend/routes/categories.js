@@ -1,13 +1,31 @@
 const router = require("express").Router();
-const {userAuth, checkRole} = require("../controllers/Auth");
-const { creatCategory , deleteCategory , updateCategory , getCategories , getCategory } = require("../controllers/categoryController");
-const upload = require('../middlewares/upload')
+const {
 
-// categories
-  router.post("/add" ,  creatCategory);
-  router.patch("/:categoryId",   updateCategory);
-  router.delete("/:categoryId",  deleteCategory);
-  router.get("/:categoryId",  getCategory);
-  router.get("/", getCategories);
+  userAuth,
+
+  checkRole
+} = require("../controllers/Auth");
+const {
+    getCategories,
+  getCategory,
+  creatCategory,
+  updateCategory,
+  deletcategory,
+
+} = require("../controllers/CategoriesController");
+
+
+
+router.post("/add" ,  creatCategory);
+
+
+
+router.get("/",/*userAuth,  checkRole(['admin']),*/ getCategories);
+
+router.get("/:categoryId",  getCategory);
+router.patch("/:categoryId",   updateCategory);
+router.delete("/:categoryId",  deletcategory);
+
+
 
 module.exports = router;

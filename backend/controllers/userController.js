@@ -1,58 +1,93 @@
-const user = require('../models/User');
+const User = require("../models/User")
 
-
-
-
-const getusers = async (req,res,role)=> {
-    let users = await user.find({role:role});
-    return res.status(200).json({
-       data:users,
-        message:"Hurray ! You ar now Get all users .",
-        success:false
-      })
-  };
-  const getuser = async (req, res) => {
-    const userid = req.params.userid
-  
-  
-    try {
-        const Oneuser = await user.find({ _id: userid })
-        res.status(200).json({ success: true, data: Oneuser })
-    } catch (error) {
-        res.status(404).json({ success: false, data: [], error: error })
-    }
+const getUsers = async (req, res, role) => {
+  try {
+    const users = await User.find({role:role})
+    res.status(200).json({ success: true,  users })
+  } catch (error) {
+    res.status(409).json({ success: false, data: [], error: error })
   }
+}
+const getOneuser = async (req, res) => {
+  const Id = req.params.Id
+  console.log("🚀 ~ file: UserController.js ~ line 13 ~ getOneuser ~ Id", Id)
+  try {
+    const users = await User.find({ _id: Id })
+    res.status(200).json({ success: true, data: users })
+  } catch (error) {
+    res.status(404).json({ success: false, data: [], error: error })
+  }
+}
 
-  const updateuser = async (req,res)=> {
-      const idusers=req.params.userid;
-      const {name}= req.body;
-      const {email}= req.body;
-      const {username}= req.body;
-      let newvalues = { $set: {name: name, email:email, username:username} };
-    let users = await user.updateOne({_id:idusers}, newvalues);
-    return res.status(200).json({
-        ...users,
-        message:"Hurray ! You ar now updat user Par ID .",
-        success:false
-      })
-  };
-
-  const deleteuser = async (req,res)=> {
-    const idusers=req.params.userid;
-
-    let users = await user.deleteOne({_id:idusers});
-    return res.status(200).json({
-      data:users,
-        message:"Hurray ! You ar now Delet user Par ID .",
-        success:false
-      })
-};
-
-  module.exports = {
-
-    getusers ,
-    updateuser  ,
-    deleteuser,
-    getuser,
+const creatCategory = async (req, res) => {
+ 
+  try {
+    const name = req.body.name
+ 
   
-   };
+
+
+    const newCategory = new Category({
+      name: name,
+  
+   
+    
+
+
+    })
+  
+    const saveCategory = await newCategory.save()
+    console.log("🚀 ~ file: FoodsController.js ~ line 44 ~ creatFood ~ saveFood", saveCategory)
+    res.status(201).json({ success: true, data: saveCategory })
+  } catch (error) {
+    res.status(404).json({ success: false, data: [], error: error })
+  }
+}
+
+const updateCategory = async (req, res) => {
+  const categoryId = req.params.categoryId
+  const { name } = req.body
+
+
+ 
+
+  try {
+    const updatedcategoryData = await Category.updateOne({ _id: categoryId }, {
+      $set: {
+        name: name,
+       
+      }
+      
+    })
+
+  
+      
+    res.status(201).json({ success: true, data: updatedcategoryData })
+  } catch (error) {
+    res.status(409).json({ success: false, data: [], error: error })
+  }
+}
+
+const deletuser = async (req, res) => {
+  const Id = req.params.Id
+  try {
+  const data =   await User.remove({ _id: Id })
+
+    res.status(200).json({ success: true, data: data })
+  } catch (error) {
+    res.status(409).json({ success: false, data: [], error: error })
+  }
+}
+
+
+
+
+
+
+
+module.exports = {
+    getUsers,
+    getOneuser,
+    deletuser
+
+};
